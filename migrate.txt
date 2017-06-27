@@ -1,0 +1,67 @@
+миграция таблицы sms
+
+ALTER TABLE `sms` CHANGE `date` `created_at` TIMESTAMP  NOT NULL;
+ALTER TABLE `sms` CHANGE `sotrud` `worker_id` INT(255) NOT NULL;
+ALTER TABLE `sms` CHANGE `cena` `price` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+миграция таблицы file
+ALTER TABLE `file` CHANGE `diagnoz` `med_diagnosis_id` INT(255) NULL DEFAULT NULL;
+ALTER TABLE `file` CHANGE `deistvie` `med_actions_id` INT(255) NULL DEFAULT NULL;
+ALTER TABLE `file` CHANGE `sotrudn` `worker_id` INT(255) NULL DEFAULT NULL;
+ALTER TABLE `file` CHANGE `schet` `med_invoice_id` INT(255) NULL DEFAULT NULL;
+ALTER TABLE `file` CHANGE `date` `created_at` TIMESTAMP NULL DEFAULT NULL;
+ALTER TABLE `file` CHANGE `del` `deleted_at` TIMESTAMP NULL DEFAULT NULL;
+RENAME TABLE `gmo`.`file` TO `gmo`.`files`;
+
+
+RENAME TABLE `gmo`.`diagnoz` TO `gmo`.`diagnoses`;
+
+ALTER TABLE `diagnoses` CHANGE `data` `created_at` TIMESTAMP NOT NULL;
+ALTER TABLE `diagnoses` CHANGE `diagnoz` `mkb_id` INT(255) NOT NULL;
+ALTER TABLE `diagnoses` CHANGE `sotrud` `worker_id` INT(255) NOT NULL;
+ALTER TABLE `diagnoses` CHANGE `file` `file_id` INT(255) NOT NULL;
+ALTER TABLE `diagnoses` CHANGE `galob` `complaint_id` INT(255) NOT NULL;
+
+
+
+ALTER TABLE `mkb` DROP `xesh`;
+RENAME TABLE `gmo`.`mkb` TO `gmo`.`mkbs`;
+
+RENAME TABLE `gmo`.`galoba` TO `gmo`.`complaints`;
+ALTER TABLE `complaints` CHANGE `sotrudn` `worker_id` INT(255) NOT NULL;
+ALTER TABLE `complaints` CHANGE `date_time` `created_at` DATETIME NOT NULL;
+ALTER TABLE `complaints` CHANGE `galoba` `text` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `complaints`
+  DROP `deistv`,
+  DROP `prim`,
+  DROP `data_deistv`;
+
+
+
+RENAME TABLE `gmo`.`deistv` TO `gmo`.`med_action`;
+ALTER TABLE `med_action` CHANGE `data` `data` DATETIME NULL;
+UPDATE `med_action` SET `data` = NULL WHERE `med_action`.`data` = '0000-00-00 00:00:00'
+ALTER TABLE `med_action` CHANGE `data_deistv` `created_at` TIMESTAMP NULL DEFAULT NULL;
+ALTER TABLE `med_action` CHANGE `id_galob` `complaint_id` INT(255) NOT NULL;
+ALTER TABLE `med_action` CHANGE `type_deistv` `action_type_id` INT(255) NOT NULL;
+ALTER TABLE `med_action` CHANGE `schet` `invoice_id` INT(255) NULL DEFAULT NULL;
+ALTER TABLE `med_action` CHANGE `rub` `money` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+
+RENAME TABLE `gmo`.`lpi` TO `gmo`.`lpies`;
+ALTER TABLE `lpies` CHANGE `file` `file_id` INT(255) NULL DEFAULT NULL;
+UPDATE `lpies` SET `file_id` = NULL;
+
+
+RENAME TABLE `gmo`.`schet` TO `gmo`.`invoices`;
+ALTER TABLE `invoices` CHANGE `data_post` `created_at` DATETIME NOT NULL;
+ALTER TABLE `invoices` CHANGE `nomer_cheta` `nomber` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `invoices` CHANGE `lpy` `lpy_id` INT(255) NULL DEFAULT NULL;
+
+
+
+
+
+
+
+
