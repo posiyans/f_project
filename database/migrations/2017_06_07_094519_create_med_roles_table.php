@@ -13,7 +13,7 @@ class CreateMedRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('med__roles', function (Blueprint $table) {
+        Schema::create('med_roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateMedRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('med__roles');
+        Schema::dropIfExists('med_roles');
     }
 }

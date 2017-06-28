@@ -18,7 +18,7 @@ class CreateTableUserMedRole extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('role_med_id')->unsigned();
-            $table->foreign('role_med_id')->references('id')->on('med__roles');
+            $table->foreign('role_med_id')->references('id')->on('med_roles');
             $table->timestamps();
             //
         });

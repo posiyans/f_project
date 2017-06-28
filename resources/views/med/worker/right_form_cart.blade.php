@@ -5,8 +5,10 @@
     <li><a href="#sms" data-toggle="pill">SMS</a></li>
     <li><a href="#smshist" data-toggle="pill">SMS история ({{ count($sms)}})</a></li>
     <li><a href="#ref" data-toggle="pill">Справка</a></li>
+    @if (count($worker->getParent())>0)
+        <li><a href="#parent" data-toggle="pill">Родственники ({{count($worker->getParent())}})</a></li>
+    @endif
     <li><a href="#log" data-toggle="pill">История</a></li>
-
 
 </ul>
 <div class="tab-content col-md-10">
@@ -117,6 +119,18 @@
             </table>
         </small>
     </div>
+    
+    @if (count($worker->getParent())>0)
+        <div class="tab-pane well" id="parent">
+            <h4>Родственники</h4>
+            
+            @foreach ($worker->getParent() as $parent)
+                <p><a href="{{route('WorkerView',$parent->id)}}">{{ $parent->fam}} {{ $parent->name}} {{ $parent->ot }}
+                {{$parent->data_rogd}}
+                </a></p>
+            @endforeach
+        </div>
+    @endif
     <div class="tab-pane well" id="log">
         <h4>История</h4>
         <p>{!! $worker->history !!}</p>

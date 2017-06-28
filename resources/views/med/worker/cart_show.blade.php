@@ -1,6 +1,6 @@
             
-                <H3>{{ $worker->fam}} {{ $worker->name}} {{ $worker->ot }} 
-                {{ Carbon\Carbon::createFromFormat('Y-m-d', $worker->data_rogd)->format('d-m-Y') }}
+                <H3>{{ $worker->fam}} {{ $worker->name}} {{ $worker->ot }}  {{ $worker->data_rogd }}
+        
                 <a href="{{route('WorkerEdit',$worker->id)}}">{{Html::image('src/img/b_edit.png')}}</a>
                 @if ($worker->data_yvolen)
                   <span class="alert-danger">Уволен  {{$worker->data_yvolen}}</span>

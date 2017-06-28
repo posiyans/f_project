@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//Route::get('/upadatedb', 'UpdateController@updateDb');
+//Route::get('/upadatedb', 'UpdateController@seedData');
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {

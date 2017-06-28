@@ -26,10 +26,10 @@ class CreateWokersTable extends Migration
             $table->foreign('firm_1c')->references('id')->on('firms');
             $table->string('dolgn')->nullable();
             $table->string('dolgn_1c')->nullable();
-            $table->integer('status')->unsigned()->nullable();
-            $table->foreign('status')->references('id')->on('statuses');
-            $table->integer('status_1c')->unsigned()->nullable();
-            $table->foreign('status_1c')->references('id')->on('statuses');
+            $table->integer('status_id')->unsigned()->nullable();
+            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->integer('status_1c_id')->unsigned()->nullable();
+            $table->foreign('status_1c_id')->references('id')->on('statuses');
             $table->dateTime('last_recourse')->nullable();
             $table->date('data_rogd');
             $table->date('data_prinyat')->nullable();

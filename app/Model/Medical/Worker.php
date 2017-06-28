@@ -25,6 +25,12 @@ class Worker extends Model
             return Carbon::createFromFormat('Y-m-d', $value)->format('d-m-Y');
         }
     }
+    public function getDataRogdAttribute($value)
+    {
+        if ($value) {
+            return Carbon::createFromFormat('Y-m-d', $value)->format('d-m-Y');
+        }
+    }
     public function setDataPrinyatAttribute($value)
     {
 
@@ -96,6 +102,11 @@ class Worker extends Model
     {
         $type= new Complaint();
         return $type->type_id;
+    }
+    public function getParent()
+    {
+        $parent= Worker::where('parent', $this->id)->get();
+        return $parent;
     }
     public function findWorker($find, $count = false)
     {

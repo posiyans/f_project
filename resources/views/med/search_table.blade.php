@@ -29,7 +29,7 @@
                   <td>{{ $worker->ot }}</td>
                   <td>{{ $worker->firm_id->name }}</td>
                   <td>{{ $worker->dolgn }}</td>
-                  <td>{{ Carbon\Carbon::createFromFormat('Y-m-d', $worker->data_rogd)->format('d-m-Y') }}</td>
+                  <td>{{$worker->data_rogd}}</td>
                 </tr>
 
   @endforeach
